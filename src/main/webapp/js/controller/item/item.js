@@ -51,7 +51,8 @@ var app = angular.module("myapp", ['ngTable']).controller("MyDairy",
                 "content": $scope.content,
                 "deadTime": $scope.deadTime.getTime(),
                 "result": 0,
-                "levelValue":$scope.level
+                "levelValue":$scope.level,
+                "type":0,
             },
             dataType: "text",
             success: function (data) {

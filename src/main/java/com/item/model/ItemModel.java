@@ -22,4 +22,6 @@ public class ItemModel {
     int levelValue;
 
     int type;
+
+    String ip;
 }

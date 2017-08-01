@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ying.mapper.DairyMapper">
     <insert id="saveDairy" parameterType="com.ying.dairy.model.DariyModel">
-        INSERT INTO dairy (title, content, dairyTime, level) VALUES (#{title}, #{content}, #{dairyTime}, #{level})
+        INSERT INTO dairy (title, content, dairyTime, level, type, ip) VALUES (#{title}, #{content}, #{dairyTime}, #{level})
     </insert>
     <select id="queryDairyOverView" resultType="com.ying.dairy.model.DariyModel">
         SELECT title, dairyTime, content, level, id FROM dairy

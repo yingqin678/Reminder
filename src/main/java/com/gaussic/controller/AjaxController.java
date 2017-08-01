@@ -44,7 +44,7 @@ public class AjaxController {
     public void requestData(@PathVariable String bean, @PathVariable String method, HttpServletRequest request, HttpServletResponse response)
     {
         Map<String, Object> params = request.getParameterMap();
-
+        String clientIp = request.getRemoteAddr();
         Object object = SpringContext.getApplicationContext().getBean(bean);
         Map<String, Object> returnValue = new HashMap<>();
         if (bean.equals("dairy"))
@@ -70,7 +70,7 @@ public class AjaxController {
             {
                 ItemModel model = new ItemModel(Integer.parseInt(((String[])params.get("id"))[0]), ((String[])params.get("content"))[0],
                         Long.parseLong(((String[])params.get("deadTime"))[0]), Integer.parseInt(((String[])params.get("result"))[0]),
-                        Integer.parseInt(((String[])params.get("levelValue"))[0]), Integer.parseInt(((String[])params.get("type"))[0]));
+                        Integer.parseInt(((String[])params.get("levelValue"))[0]), Integer.parseInt(((String[])params.get("type"))[0]), clientIp);
                 boolean result = item.AddItem(model);
                 returnValue.put("result", String.valueOf(result));
             }
