@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.item.mapper.ItemMapper">
+<insert id="addItem" parameterType="com.item.model.ItemModel">
+    INSERT INTO ITEM (content, deadTime, result, levelValue, type) VALUES (#{content}, #{deadTime}, #{result}, #{levelValue}, #{type})
+</insert>
+<update id="updateItem">
+    UPDATE ITEM SET content = #{content}, deadTime = #{deadTime}, result = #{result}, levelValue = #{levelValue}, type = #{type} WHERE id = #{id}
+</update>
+<select id="queryDoingItem" resultType="com.item.model.ItemModel">
+    SELECT id, content, deadTime, levelValue, type from ITEM where result = 0
+</select>
+<select id="queryDoneOrCancelItems" resultType="com.item.model.ItemModel">
+    SELECT id, content, deadTime, result, levelValue, type from ITEM where result = 1 OR result= 2
+</select>
+</mapper>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO</title>
+    <!--<link rel="stylesheet" href="../../css/ng-table.min.css">-->
+    <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+    <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!--<script src="../../js/angular.js"></script>-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-sanitize.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-resource.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.js"></script>
+    <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+    <script src="../../js/controller/item/item.js"></script>
+    <script src="../../js/jquery-2.0.3.min.js"></script>
+    <!--<script src="../../js/ng-table.min.js"></script>-->
+</head>
+<body>
+<div ng-controller="MyDairy">
+    <p>TODO Items</p>
+    <div>
+        <h5>{{clock}}</h5>
+    </div>
+    <p>添加:</p>
+    <p style="margin-left: 30px;margin-top: 0px;float: left;margin-bottom: 0px;">内容</p>
+    <input ng-model="content" style="width: 20%;margin-left: 10px;margin-right: 10px;float: left;" placeholder="add the item to do"/>
+    <p style="margin-top: 0px;float: left;margin-bottom: 0px;">截止时间:</p>
+    <input type="date" style="float: left;line-height: normal;" ng-model="deadTime" />
+    <p style="margin-left: 10px;margin-bottom: 0px;float: left;margin-top: 0px;">级别:</p>
+    <select ng-model="level" style="margin-left: 5px;" >
+        <option value="0" ng-selected="level==0">低</option>
+        <option value="1" ng-selected="level==1">中</option>
+        <option value="2" ng-selected="level==2">高</option>
+    </select>
+
+    <button style="height: 20px;width: 50px; background-color: beige;" type="button" ng-click="addItem()">提交</button>
+    <button style="height: 20px;width: 50px; background-color: beige;" type="button" ng-click="cancel()">取消</button>
+
+    <div style="margin-top: 20px;">
+        <p>待办事项：</p>
+        <table ng-table="tableParams" class="table table-condensed table-bordered table-striped">
+            <tr ng-repeat="user in formData">
+                <td data-title="'id'">
+                    {{user.id}}
+                </td>
+                <td data-title="'内容'">
+                    <p ng-show="user.edit==false">{{user.content}}</p>
+                    <input ng-show="user.edit==true" ng-model="editValue.content" />
+                </td>
+                <td data-title="'级别'">
+                    <div ng-show="user.edit==false">
+                        <p ng-show="user.levelValue==0">低</p>
+                        <p ng-show="user.levelValue==1">中</p>
+                        <p ng-show="user.levelValue==2">高</p>
+                    </div>
+                    <div ng-show="user.edit==true">
+                        <select ng-model="editValue.levelValue" style="margin-left: 5px;" >
+                            <option value="0" ng-selected="editValue.levelValue==0">低</option>
+                            <option value="1" ng-selected="editValue.levelValue==1">中</option>
+                            <option value="2" ng-selected="editValue.levelValue==2">高</option>
+                        </select>
+                    </div>
+                </td>
+                <td data-title="'截止日期'">
+                    <p ng-show="user.edit==false">{{user.deadTime | date:"yyyy/MM/dd"}}</p>
+                    <input ng-show="user.edit==true" type="date" style="float: left;line-height: normal;" ng-model="editValue.deadTime" />
+                </td>
+                <td data-title="'操作'">
+                    <a ng-click="updateItem(user, 1)" ng-show="user.edit==false" style="cursor: pointer;">完成</a>
+                    <a ng-click="updateItem(user, 2)" ng-show="user.edit==false" style="cursor: pointer;">去除</a>
+                    <a ng-click="editUser(user)" ng-show="user.edit==false" style="cursor: pointer;">编辑</a>
+                    <a ng-click="saveUser(user)" ng-show="user.edit==true" style="cursor: pointer;">保存</a>
+                    <a ng-click="cancelEdit(user)" ng-show="user.edit==true" style="cursor: pointer;">取消</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
