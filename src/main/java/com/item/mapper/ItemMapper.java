@@ -12,7 +12,7 @@ public interface ItemMapper {
 
     void updateItem(ItemModel item);
 
-    List<ItemModel> queryDoingItem();
+    List<ItemModel> queryDoingItem(String ip);
 
-    List<ItemModel> queryDoneOrCancelItems();
+    List<ItemModel> queryDoneOrCancelItems(String ip);
 }

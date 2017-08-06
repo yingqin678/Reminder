@@ -16,6 +16,9 @@ var app = angular.module("myapp", ['ngTable']).controller("MyDairy",
         $scope.deadTime = new Date();
         $scope.editValue = {};
         $scope.content = "";
+        $scope.noSetName = false;
+        $scope.user = {"name":""};
+        $scope.queryName();
     }
     $scope.cancel = function () {
         $scope.id = 0;
@@ -38,10 +41,23 @@ var app = angular.module("myapp", ['ngTable']).controller("MyDairy",
         user.levelValue = $scope.editValue.levelValue;
         user.deadTime = $scope.editValue.deadTime.getTime();
         $scope.updateItem(user, 0);
-    }
-    $scope.test = function () {
-        console.log("123");
-    }
+    };
+    $scope.queryName = function () {
+        $.ajax({
+            type: 'post',
+            url: '../../ajax/user/getName',
+            data: {},
+            dataType: "text",
+            success: function (data) {
+                var name = JSON.parse(data).result;
+                if (name === undefined || name === "") {
+                    $scope.noSetName = true;
+                } else {
+                    $scope.user.name = name;
+                }
+            }
+        });
+    };
     $scope.addItem = function () {
         $.ajax({
             type: 'post',
@@ -51,8 +67,8 @@ var app = angular.module("myapp", ['ngTable']).controller("MyDairy",
                 "content": $scope.content,
                 "deadTime": $scope.deadTime.getTime(),
                 "result": 0,
-                "levelValue":$scope.level,
                 "type":0,
+                "levelValue":$scope.level,
             },
             dataType: "text",
             success: function (data) {
@@ -71,7 +87,8 @@ var app = angular.module("myapp", ['ngTable']).controller("MyDairy",
                 "content": data.content,
                 "deadTime": data.deadTime,
                 "result": result,
-                "levelValue":data.levelValue
+                "levelValue":data.levelValue,
+                "type":0
             },
             dataType: "text",
             success: function (data) {
@@ -107,17 +124,30 @@ var app = angular.module("myapp", ['ngTable']).controller("MyDairy",
                 }
             });
     };
-        $scope.queryDoneOrCancel = function () {
-            $.ajax({
-                type: 'post',
-                url: '../../ajax/item/queryDomeOrDoingItem',
-                data: {},
-                dataType: "text",
-                success: function (data) {
-                    console.log(data)
-                }
-            });
-        };
+    $scope.queryDoneOrCancel = function () {
+        $.ajax({
+            type: 'post',
+            url: '../../ajax/item/queryDomeOrDoingItem',
+            data: {},
+            dataType: "text",
+            success: function (data) {
+                console.log(data)
+            }
+        });
+    };
+    $scope.setName = function () {
+        $.ajax({
+            type: 'post',
+            url: '../../ajax/user/setIpAndName',
+            data: {
+                "name": $scope.user.name
+            },
+            dataType: 'text',
+            success: function (data) {
+                $scope.noSetName = false;
+            }
+        });
+    }
     $scope.updateClock();
     $scope.init();
     $scope.queryDoingItem();

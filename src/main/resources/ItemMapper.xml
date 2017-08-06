@@ -8,9 +8,9 @@
     UPDATE ITEM SET content = #{content}, deadTime = #{deadTime}, result = #{result}, levelValue = #{levelValue}, type = #{type} WHERE id = #{id}
 </update>
 <select id="queryDoingItem" resultType="com.item.model.ItemModel">
-    SELECT id, content, deadTime, levelValue, type from ITEM where result = 0
+    SELECT id, content, deadTime, levelValue, type from ITEM where result = 0 AND ip = #{ip}
 </select>
 <select id="queryDoneOrCancelItems" resultType="com.item.model.ItemModel">
-    SELECT id, content, deadTime, result, levelValue, type from ITEM where result = 1 OR result= 2
+    SELECT id, content, deadTime, result, levelValue, type from ITEM where result = 1 OR result= 2 AND ip = #{ip}
 </select>
 </mapper>

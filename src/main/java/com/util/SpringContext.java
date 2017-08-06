@@ -1,4 +1,4 @@
-package com.ying.spring.context;
+package com.util;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

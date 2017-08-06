@@ -1,4 +1,4 @@
-package com.gaussic.controller;
+package com.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping("/")
-public class HeadController {
+public class RootController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "index";
+        return "item/item";
     }
 
-    @RequestMapping(value = "/api", method = RequestMethod.GET)
+    @RequestMapping(value = "/{p:.*}", method = RequestMethod.GET)
     public String indexApi() {
-            return "index";
+            return "item/item";
     }
 
 }

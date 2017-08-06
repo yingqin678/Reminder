@@ -1,4 +1,4 @@
-package com.gaussic.controller;
+package com.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by dzkan on 2016/3/8.
  */
 @Controller
-@RequestMapping("/api")
-public class MainController {
+@RequestMapping("/portal")
+public class PageController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "index";
+        return "item/item";
     }
 
     @RequestMapping(value = "/{p:.*}", method = RequestMethod.GET)
     public String index(@PathVariable String p) {
         if (p == null || p == "") {
-            return "index";
+            return "item/item";
         }
 
-        return p;
+        return p + "/" + p;
     }
 
     @RequestMapping(value = "/{p:.*}/{v:.*}", method = RequestMethod.GET)
@@ -32,6 +32,6 @@ public class MainController {
             return "index";
         }
 
-        return p + "/" + v;
+        return p + "/" + v + "/" + v;
     }
 }

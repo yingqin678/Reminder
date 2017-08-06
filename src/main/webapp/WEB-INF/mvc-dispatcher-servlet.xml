@@ -5,7 +5,7 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!--指明 controller 所在包，并扫描其中的注解-->
-    <context:component-scan base-package="com.gaussic.controller"/>
+    <context:component-scan base-package="com.controller"/>
 
     <!-- 静态资源(js、image等)的访问 -->
     <mvc:default-servlet-handler/>
@@ -21,5 +21,5 @@
         <property name="suffix" value=".html"/>
     </bean>
 
-    <bean class="com.ying.spring.context.SpringContext" lazy-init="false"></bean>
+    <bean class="com.util.SpringContext" lazy-init="false"></bean>
 </beans>

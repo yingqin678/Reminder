@@ -1,14 +1,5 @@
-import com.ying.dairy.DariyService;
-import com.ying.dairy.impl.DariyServiceImpl;
-import com.ying.spring.context.SpringContext;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,11 +8,6 @@ import java.util.regex.Pattern;
  */
 public class TestMethod {
 
-    @Test
-    public void testDairy()
-    {
-        DariyService dariyService = (DariyService) SpringContext.getApplicationContext().getBean("dairy");
-    }
 
     @Test
     public void testRegex()
